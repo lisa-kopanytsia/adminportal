@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/header :: navbar" />
+
+<div class="container">
+    <div>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/product/productList}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Назад</a></li>
+            <li><a th:href="@{/product/updateProduct?id=}+${product.id}">Изменить</a></li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img th:src="@{/img/product/}+${product.id}+'.png'" class="img-responsive center-block" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-9">
+            <h3 th:text="${product.name}"></h3>
+            <div class="row">
+                <div class="col-xs-6">
+                    <p><strong>Категория: </strong><span th:text="${product.category}"></span></p>
+                    <p><strong>Вес: </strong><span th:text="${product.weight}"></span></p>
+                    <p><strong>Цена: </strong><span th:text="${product.listPrice}"></span></p>
+                    <p><strong>Акционная цена: </strong><span th:text="${product.price}"></span></p>
+                </div>
+            </div>
+            <p><strong>Описание: </strong><span th:utext="${product.description}"></span></p>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts" />
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+<div class="container">
+    <div class="content-top">
+        <h5 class="center-top"> Привет, ты на админ портале Cakes</h5>
+        <hr />
+        <img th:src="@{/img/cakeslogo.png}" class="img-res" style="width: 130px" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4 col-md-offset-4">
+        <div class="bg-danger" th:if="${param.error}">
+            Неверный пароль или логин
+        </div>
+        <div class="bg-danger" th:if="${param.logout}">
+            Вы произвели выход.
+        </div>
+        <form class="form-signin" th:action="@{/login}" method="post">
+            <h2 class="form-signin-head"> Пожалуйста, авторизуйтесь</h2>
+            <div class="form-group">
+                <label for="username" class="sr-only">Логин</label>
+                <input type="text" class="form-control" placeholder="Логин" name="username" id="username" required="required" autofocus="autofocus"/>
+            </div>
+            <div class="form-group">
+                <label for="password" class="sr-only">Пароль</label>
+                <input type="password" class="form-control" placeholder="Пароль" name="password" id="password" required="required" />
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+
+        </form>
+    </div>
+
+</div>
+
+<div th:replace="common/header :: header" />
+
+
+</body>
+
+</html>

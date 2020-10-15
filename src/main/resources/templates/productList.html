@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+<div th:replace="common/header :: navbar" />
+
+<div class="container">
+    <div class="table-responsive">
+        <table id="productListTable" class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th><input th:id="selectAllProduct" type="checkbox"/> </th>
+                <th>Наменование товара</th>
+                <th>Категория</th>
+                <th>Вес</th>
+                <th>Предыдущая цена товара</th>
+                <th>Акционная цена товара</th>
+                <th>Статус товара</th>
+                <th>Управление</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="product : ${productList}">
+                <td>
+                    <input hidden="hidden" name="id" th:value="${product.id}" />
+                    <input th:id="'selected'+${product.id}" class="checkboxProduct" type="checkbox" />
+                </td>
+                <td><a th:href="@{/product/productInfo(id=${product.id})}"><span th:text="${product.name}"></span></a></td>
+                <td th:text="${product.category}"></td>
+                <td th:text="${product.weight}"></td>
+                <td th:text="${product.listPrice}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.active}"></td>
+                <td>
+                    <input hidden="hidden" name="id" th:value="${product.id}" />
+                    <button th:id="'oneProd-'+${product.id}" class="btn btn-danger btn-xs delete-product" type="submit" value="delete"><span class="fa fa-times"></span>Удалить</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button th:id="deleteSelected" class="btn btn-danger">Удалить выделенное</button>
+
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts" />
+
+<script>
+    $(document).ready(function () {
+        $("#productListTable").DataTable({
+            "lengthMenu": [[5,10,15,20,-1],[5,10,15,20,"All"]],
+            "ordering":false,
+            stateSave: true
+        });
+
+    });
+</script>
+</body>
+</html>

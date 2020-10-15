@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/header :: navbar"/>
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal" th:action="@{/product/add}" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend class="center-block"> Информация о товаре <span style="font-size: small"> * обязательное заполнение</span>
+                </legend>
+
+                <!-- наименование товара -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="name">* Название</label>
+                    <div class="col-md-8">
+                        <input type="text" name="name" class="form-control" id="name"
+                               th:value="${product.name}" required="required" placeholder="Название"/>
+                        <span class="help-block">Наменование товара</span>
+                    </div>
+                </div>
+
+                <!-- категория товара -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="category">* Категория</label>
+                    <div class="col-md-8">
+                        <select th:value="${product.category}" id="category" name="category" class="form-control">
+                            <option value="" selected="selected" disabled="disabled"> Пожалуйста, укажите категорию
+                            </option>
+                            <option value="classic_cakes" th:selected="(${product.category}=='classic_cakes')">
+                                Классические торты
+                            </option>
+                            <option value="cheesecakes" th:selected="(${product.category}=='cheesecakes')">Чизкейки
+                            </option>
+                            <option value="sponge_cakes" th:selected="(${product.category}=='sponge_cakes')">Бисквитные
+                                торты
+                            </option>
+                            <option value="cookies" th:selected="(${product.category}=='cookies')">Печенье</option>
+                            <option value="cakes" th:selected="(${product.category}=='cakes')">Пироженные</option>
+                            <option value="jams" th:selected="(${product.category}=='jams')">Джемы</option>
+                            <option value="cupcakes" th:selected="(${product.category}=='cupcakes')">Капкейки</option>
+                            <option value="chocolate_and_sweets"
+                                    th:selected="(${product.category}=='chocolate_and_sweets')">Шоколад и конфеты
+                            </option>
+                            <option value="mousse_cakes" th:selected="(${product.category}=='mousse_cakes')">Муссовые
+                                торты
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- вес товара -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="weight">* Вес</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="number" name="weight" step="0.1" class="form-control" id="weight"
+                                   th:value="${product.weight}" required="required" placeholder="Вес" /> <span class="input-group-addon">кг</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- предыдущая цена товара -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="listPrice">* Цена товара</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">грн</span>
+                            <input th:value="${product.listPrice}" type="number" name="listPrice" class="form-control"
+                                   id="listPrice" placeholder="Цена товара"/>
+                        </div>
+                        <span class="help-block">Цена товара</span>
+                    </div>
+                </div>
+
+                <!-- акционная цена товара -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="price">Текущая цена товара</label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">грн</span>
+                            <input th:value="${product.price}" type="number" name="price" class="form-control"
+                                   id="price" placeholder="Текущая цена товара"/>
+                        </div>
+                        <span class="help-block">Акционная цена товара</span>
+                    </div>
+                </div>
+
+                <!-- статус товара -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="active">Статус товара</label>
+                    <div class="col-md-8">
+                        <label>
+                            <input value="true" type="radio" name="active" checked="checked"/> В наличии
+                        </label>
+                        <label>
+                            <input value="false" type="radio" name="active"/> Нет в наличии
+                        </label>
+                        <span class="help-block">Наличие товара</span>
+                    </div>
+                </div>
+
+                <!-- описание товара-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="description">* Описание товара</label>
+                    <div class="col-md-8">
+                    <textarea name="description" rows="5" class="form-control" id="description"
+                              th:value="${product.description}" required="required" placeholder="Описание товара"/>
+
+                    </div>
+                </div>
+
+                <!-- загрузка изображения -->
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label for="img">Загрузка изображения товара</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="img" type="file" name="img" th:value="${product.img}"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                        <a class="btn btn-danger" th:href="@{/}">Отмена</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+
+</html>
